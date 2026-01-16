@@ -3,9 +3,7 @@ import { SendMailDto, SendTestMailDto } from './dto/send-mail.dto';
 export declare class MailController {
     private readonly mailService;
     constructor(mailService: MailService);
-    healthCheck(): {
-        message: string;
-    };
+    landingPage(): string;
     sendMail(sendMailDto: SendMailDto): Promise<{
         success: boolean;
         message: string;
