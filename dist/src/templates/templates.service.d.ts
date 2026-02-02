@@ -7,6 +7,8 @@ export declare class TemplatesService {
     private readonly logger;
     constructor(templateModel: Model<TemplateDocument>);
     findAll(fcode?: string): Promise<Template[]>;
+    findByScode(scode: string): Promise<Template[]>;
+    findByScodeAndSubjectId(scode: string, subjectId: string): Promise<Template | null>;
     findOne(id: string): Promise<Template>;
     create(createTemplateDto: CreateTemplateDto): Promise<Template>;
     update(id: string, updateTemplateDto: UpdateTemplateDto): Promise<Template>;
@@ -15,4 +17,5 @@ export declare class TemplatesService {
         message: string;
     }>;
     countByFcode(fcode: string): Promise<number>;
+    countByScode(scode: string): Promise<number>;
 }

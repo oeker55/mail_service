@@ -15,13 +15,25 @@ let Template = class Template {
 };
 exports.Template = Template;
 __decorate([
-    (0, mongoose_1.Prop)({ required: true, index: true }),
+    (0, mongoose_1.Prop)({ required: false, index: true }),
     __metadata("design:type", String)
 ], Template.prototype, "fcode", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Template.prototype, "name", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: false, index: true }),
+    __metadata("design:type", String)
+], Template.prototype, "scode", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: false, index: true }),
+    __metadata("design:type", String)
+], Template.prototype, "subjectId", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: false }),
+    __metadata("design:type", String)
+], Template.prototype, "title", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: Object }),
     __metadata("design:type", Array)
@@ -43,5 +55,6 @@ exports.Template = Template = __decorate([
 ], Template);
 exports.TemplateSchema = mongoose_1.SchemaFactory.createForClass(Template);
 exports.TemplateSchema.index({ fcode: 1, name: 1 });
+exports.TemplateSchema.index({ scode: 1, subjectId: 1 });
 exports.TemplateSchema.index({ updatedAt: -1 });
 //# sourceMappingURL=template.schema.js.map

@@ -33,6 +33,46 @@ export class TemplatesController {
   }
 
   /**
+   * scode'a göre tüm templateleri getir
+   * GET /api/templates/by-scode?scode=...
+   */
+  @Get('by-scode')
+  async findByScode(@Query('scode') scode: string) {
+    if (!scode) {
+      throw new HttpException(
+        { error: 'scode zorunludur' },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return this.templatesService.findByScode(scode);
+  }
+
+  /**
+   * scode ve subjectId ile template getir
+   * GET /api/templates/by-subject?scode=...&subjectId=...
+   */
+  @Get('by-subject')
+  async findBySubject(
+    @Query('scode') scode: string,
+    @Query('subjectId') subjectId: string,
+  ) {
+    if (!scode || !subjectId) {
+      throw new HttpException(
+        { error: 'scode ve subjectId zorunludur' },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const template = await this.templatesService.findByScodeAndSubjectId(scode, subjectId);
+    if (!template) {
+      throw new HttpException(
+        { error: 'Template bulunamadı' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return template;
+  }
+
+  /**
    * ID'ye göre template getir
    * GET /api/templates/:id
    */
@@ -47,9 +87,9 @@ export class TemplatesController {
    */
   @Post()
   async create(@Body() createTemplateDto: CreateTemplateDto) {
-    if (!createTemplateDto.fcode || !createTemplateDto.name) {
+    if (!createTemplateDto.name) {
       throw new HttpException(
-        { error: 'fcode ve name zorunludur' },
+        { error: 'name zorunludur' },
         HttpStatus.BAD_REQUEST,
       );
     }

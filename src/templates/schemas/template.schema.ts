@@ -5,11 +5,20 @@ export type TemplateDocument = Template & Document;
 
 @Schema({ timestamps: true })
 export class Template {
-  @Prop({ required: true, index: true })
-  fcode: string;
+  @Prop({ required: false, index: true })
+  fcode?: string;
 
   @Prop({ required: true })
   name: string;
+
+  @Prop({ required: false, index: true })
+  scode?: string;
+
+  @Prop({ required: false, index: true })
+  subjectId?: string;
+
+  @Prop({ required: false })
+  title?: string;
 
   @Prop({ type: Object })
   elements_json: any[];
@@ -28,4 +37,5 @@ export const TemplateSchema = SchemaFactory.createForClass(Template);
 
 // Index oluştur
 TemplateSchema.index({ fcode: 1, name: 1 });
+TemplateSchema.index({ scode: 1, subjectId: 1 });
 TemplateSchema.index({ updatedAt: -1 });

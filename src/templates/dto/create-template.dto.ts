@@ -2,10 +2,23 @@ import { IsString, IsArray, IsOptional } from 'class-validator';
 
 export class CreateTemplateDto {
   @IsString()
-  fcode: string;
+  @IsOptional()
+  fcode?: string;
 
   @IsString()
   name: string;
+
+  @IsString()
+  @IsOptional()
+  scode?: string;
+
+  @IsString()
+  @IsOptional()
+  subjectId?: string;
+
+  @IsString()
+  @IsOptional()
+  title?: string;
 
   @IsArray()
   @IsOptional()

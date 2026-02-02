@@ -27,12 +27,28 @@ let TemplatesController = class TemplatesController {
     async findAll(fcode) {
         return this.templatesService.findAll(fcode);
     }
+    async findByScode(scode) {
+        if (!scode) {
+            throw new common_1.HttpException({ error: 'scode zorunludur' }, common_1.HttpStatus.BAD_REQUEST);
+        }
+        return this.templatesService.findByScode(scode);
+    }
+    async findBySubject(scode, subjectId) {
+        if (!scode || !subjectId) {
+            throw new common_1.HttpException({ error: 'scode ve subjectId zorunludur' }, common_1.HttpStatus.BAD_REQUEST);
+        }
+        const template = await this.templatesService.findByScodeAndSubjectId(scode, subjectId);
+        if (!template) {
+            throw new common_1.HttpException({ error: 'Template bulunamadı' }, common_1.HttpStatus.NOT_FOUND);
+        }
+        return template;
+    }
     async findOne(id) {
         return this.templatesService.findOne(id);
     }
     async create(createTemplateDto) {
-        if (!createTemplateDto.fcode || !createTemplateDto.name) {
-            throw new common_1.HttpException({ error: 'fcode ve name zorunludur' }, common_1.HttpStatus.BAD_REQUEST);
+        if (!createTemplateDto.name) {
+            throw new common_1.HttpException({ error: 'name zorunludur' }, common_1.HttpStatus.BAD_REQUEST);
         }
         return this.templatesService.create(createTemplateDto);
     }
@@ -75,6 +91,21 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], TemplatesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('by-scode'),
+    __param(0, (0, common_1.Query)('scode')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], TemplatesController.prototype, "findByScode", null);
+__decorate([
+    (0, common_1.Get)('by-subject'),
+    __param(0, (0, common_1.Query)('scode')),
+    __param(1, (0, common_1.Query)('subjectId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], TemplatesController.prototype, "findBySubject", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

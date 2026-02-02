@@ -8,6 +8,14 @@ export class SendWithTemplateDto {
   @IsOptional()
   subject?: string;
 
+  @IsString()
+  @IsOptional()
+  subjectId?: string;
+
+  @IsString()
+  @IsOptional()
+  scode?: string;
+
   @IsObject()
   @IsOptional()
   replacements?: Record<string, string>;

@@ -1,8 +1,11 @@
 import { Document } from 'mongoose';
 export type TemplateDocument = Template & Document;
 export declare class Template {
-    fcode: string;
+    fcode?: string;
     name: string;
+    scode?: string;
+    subjectId?: string;
+    title?: string;
     elements_json: any[];
     html_content: string;
     createdAt?: Date;

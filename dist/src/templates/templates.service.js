@@ -30,6 +30,15 @@ let TemplatesService = TemplatesService_1 = class TemplatesService {
             .sort({ updatedAt: -1 })
             .exec();
     }
+    async findByScode(scode) {
+        return this.templateModel
+            .find({ scode })
+            .sort({ subjectId: 1 })
+            .exec();
+    }
+    async findByScodeAndSubjectId(scode, subjectId) {
+        return this.templateModel.findOne({ scode, subjectId }).exec();
+    }
     async findOne(id) {
         const template = await this.templateModel.findById(id).exec();
         if (!template) {
@@ -66,6 +75,9 @@ let TemplatesService = TemplatesService_1 = class TemplatesService {
     }
     async countByFcode(fcode) {
         return this.templateModel.countDocuments({ fcode }).exec();
+    }
+    async countByScode(scode) {
+        return this.templateModel.countDocuments({ scode }).exec();
     }
 };
 exports.TemplatesService = TemplatesService;

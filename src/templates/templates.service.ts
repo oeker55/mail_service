@@ -25,6 +25,23 @@ export class TemplatesService {
   }
 
   /**
+   * scode'a göre tüm templateleri getir
+   */
+  async findByScode(scode: string): Promise<Template[]> {
+    return this.templateModel
+      .find({ scode })
+      .sort({ subjectId: 1 })
+      .exec();
+  }
+
+  /**
+   * scode ve subjectId ile template bul
+   */
+  async findByScodeAndSubjectId(scode: string, subjectId: string): Promise<Template | null> {
+    return this.templateModel.findOne({ scode, subjectId }).exec();
+  }
+
+  /**
    * ID'ye göre template getir
    */
   async findOne(id: string): Promise<Template> {
@@ -83,5 +100,12 @@ export class TemplatesService {
    */
   async countByFcode(fcode: string): Promise<number> {
     return this.templateModel.countDocuments({ fcode }).exec();
+  }
+
+  /**
+   * Scode'a göre template say
+   */
+  async countByScode(scode: string): Promise<number> {
+    return this.templateModel.countDocuments({ scode }).exec();
   }
 }
