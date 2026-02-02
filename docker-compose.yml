@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: mail-service
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=mongodb+srv://ozgur:cvNrUnR80VQhIAo1@akdagsu.pxczo.mongodb.net/mailTemplate?w=majority
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_SECURE=false
+      - SMTP_USER=oeker55@gmail.com
+      - SMTP_PASS=ovcsdpfzklvnjzgy
+      - MAIL_FROM=oeker55@gmail.com
+    restart: unless-stopped
