@@ -43,6 +43,12 @@ let TemplatesController = class TemplatesController {
         }
         return template;
     }
+    async getSubjectIds(scode) {
+        if (!scode) {
+            throw new common_1.HttpException({ error: 'scode zorunludur' }, common_1.HttpStatus.BAD_REQUEST);
+        }
+        return this.templatesService.getSubjectIdsByScode(scode);
+    }
     async findOne(id) {
         return this.templatesService.findOne(id);
     }
@@ -106,6 +112,13 @@ __decorate([
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], TemplatesController.prototype, "findBySubject", null);
+__decorate([
+    (0, common_1.Get)('subject-ids'),
+    __param(0, (0, common_1.Query)('scode')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], TemplatesController.prototype, "getSubjectIds", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

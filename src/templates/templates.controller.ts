@@ -73,6 +73,21 @@ export class TemplatesController {
   }
 
   /**
+   * scode'a göre sadece subject ID'leri getir
+   * GET /api/templates/subject-ids?scode=...
+   */
+  @Get('subject-ids')
+  async getSubjectIds(@Query('scode') scode: string) {
+    if (!scode) {
+      throw new HttpException(
+        { error: 'scode zorunludur' },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return this.templatesService.getSubjectIdsByScode(scode);
+  }
+
+  /**
    * ID'ye göre template getir
    * GET /api/templates/:id
    */

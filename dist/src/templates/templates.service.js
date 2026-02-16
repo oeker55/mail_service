@@ -79,6 +79,14 @@ let TemplatesService = TemplatesService_1 = class TemplatesService {
     async countByScode(scode) {
         return this.templateModel.countDocuments({ scode }).exec();
     }
+    async getSubjectIdsByScode(scode) {
+        const templates = await this.templateModel
+            .find({ scode })
+            .select('subjectId')
+            .lean()
+            .exec();
+        return templates.map(t => t.subjectId);
+    }
 };
 exports.TemplatesService = TemplatesService;
 exports.TemplatesService = TemplatesService = TemplatesService_1 = __decorate([

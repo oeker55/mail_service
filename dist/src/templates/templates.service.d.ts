@@ -18,4 +18,5 @@ export declare class TemplatesService {
     }>;
     countByFcode(fcode: string): Promise<number>;
     countByScode(scode: string): Promise<number>;
+    getSubjectIdsByScode(scode: string): Promise<string[]>;
 }

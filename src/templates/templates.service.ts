@@ -108,4 +108,16 @@ export class TemplatesService {
   async countByScode(scode: string): Promise<number> {
     return this.templateModel.countDocuments({ scode }).exec();
   }
+
+  /**
+   * scode'a göre sadece mevcut subject ID'leri getir (performans için)
+   */
+  async getSubjectIdsByScode(scode: string): Promise<string[]> {
+    const templates = await this.templateModel
+      .find({ scode })
+      .select('subjectId')
+      .lean()
+      .exec();
+    return templates.map(t => t.subjectId);
+  }
 }
